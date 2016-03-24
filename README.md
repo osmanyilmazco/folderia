@@ -21,7 +21,7 @@ require_once __DIR__ . '/src/autoload.php';
 
 **Sınıfımızı tanımlıyoruz** ```$folder = new Astald\Folderia;``` kullanımı yerine use ile sınıfımızda belirtiyoruz.  Siz istediğiniz gibi kullanabilirsiniz.
 ```
-use Astald\Folderia; // 
+use Astald\Folderia;
 $folder = new Folderia;
 ```
 
