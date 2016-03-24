@@ -9,7 +9,7 @@ Folderia klasör listeleme sınıfı, composer ile kullanım yapılmaktadır.
 Alternatif olarak ```composer.json``` dosyasınada ekleyebilirsiniz.
 ```
 "require": {
-    "google/recaptcha": "~1.1"
+    "osmanyilmazco/folderia": "~1.0"
 }
 ```
 
