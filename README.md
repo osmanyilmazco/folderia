@@ -36,14 +36,14 @@ Listeleme yapılırken görünmesini istemediğimiz dosyalarımızı paramet
 $folder->setFileHidden(array("index.php","zsystem"));
 ```
 
-**setFolderName** fonksiyonumuza, listelemenin baz alınacağı klasörü yazıyoruz. Varsayılan kök dizindir
+**setFolderName()** fonksiyonumuza, listelemenin baz alınacağı klasörü yazıyoruz. Varsayılan kök dizindir
 ```
 $folder->setFolderName('customer');
 ```
 
 **getFolder()** fonksiyonu ile listelemyi sağlıyoruz.
 ```
-$folder->setFolderName('customer');
+$folder->getFolder();
 ```
 
 ### Kullanım örneği
