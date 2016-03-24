@@ -1,7 +1,19 @@
 # Folderia
-Folderia folder, list classes
+Folderia klasör listeleme sınıfı, composer ile kullanım yapılmaktadır.
 
 ## Kullanım
+### Composer ile kullanım
+
+```composer require osmanyilmazco/folderia "~1.0"```
+
+Alternatif olarak ```composer.json``` dosyasınada ekleyebilirsiniz.
+```
+"require": {
+    "google/recaptcha": "~1.1"
+}
+```
+
+### Normal Kullanım
 **Composer olmadan kullanmak için** autoload.php dosyamızı kullanmak istediğimiz kısma belirtiyoruz.
 ```
 require_once __DIR__ . '/src/autoload.php';
