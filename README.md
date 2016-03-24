@@ -14,7 +14,7 @@ Alternatif olarak ```composer.json``` dosyasınada ekleyebilirsiniz.
 ```
 
 ### Normal Kullanım
-**Composer olmadan kullanmak için** autoload.php dosyamızı kullanmak istediğimiz kısma belirtiyoruz.
+**Composer olmadan kullanmak için** autoload.php dosyamızı kullanmak istediğimiz yerde belirtiyoruz.
 ```
 require_once __DIR__ . '/src/autoload.php';
 ```
