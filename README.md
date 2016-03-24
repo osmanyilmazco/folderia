@@ -1,32 +1,40 @@
 # Folderia
-Folderia List Classes
+Folderia folder, list classes
 
 ## Kullanım
-**Sınıfımızı tanımlıyoruz**
+**Composer olmadan kullanmak için** autoload.php dosyamızı kullanmak istediğimiz kısma belirtiyoruz.
 ```
-require "class/Folder.php";
+require_once __DIR__ . '/src/autoload.php';
 ```
-**Sınıfımızı tanımlıyoruz**
+
+**Sınıfımızı tanımlıyoruz** ```$folder = new Astald\Folderia;``` kullanımı yerine use ile sınıfımızda belirtiyoruz.  Siz istediğiniz gibi kullanabilirsiniz.
 ```
-$folder = new Folder;
+use Astald\Folderia; // 
+$folder = new Folderia;
 ```
-#### Listeleme tipi varsayılan NULL dur, siz isterseniz, "size", "type" vb. yapabilirsiniz.
+
+#### Listeleme tipi varsayılan NULL dur, ihtiyacınıza göre, "size", "type" vb. yapabilirsiniz.
 
 ```
 $folder->orderBy = 'type';
 ```
 
-**Gizlemek istediğimiz dosyaları giriyoruz**
+**Listeleme yapılırken görünmesini istemediğimiz dosyalarımızı paramet**
 ```
 $folder->setFileHidden(array("index.php","zsystem"));
 ```
 
-**gireceğimiz dosyanın adını baz alarak listelemeyi sağlıyoruz, Varsayılan kök dizindir **
+**setFolderName fonksiyonumuza, listelemenin baz alınacağı klasörü yazıyoruz. Varsayılan kök dizindir **
 ```
 $folder->setFolderName('customer');
 ```
 
-### Listelemeyi yapıyoruz.
+**getFolder() fonksiyonu ile listelemyi sağlıyoruz. **
+```
+$folder->setFolderName('customer');
+```
+
+### Kullanım örneği
 ```
 foreach ($folder->getFolder() as $key => $value) {
 	echo "Dosya Adı : {$value['filename']}, Tam Dosya Adı: {$value['name']}, Dosya Türü: {$value['type']}, Dosya Boyutu: {$value['size']}, Son Düzenleme Tarihi: {$value['lastmod']}";
