@@ -1,7 +1,7 @@
 <?php 
 
 /*
- * Folderia, Klasör sınıfı
+ * Folderio, Klasör sınıfı
  *  
  * Author:  Osman YILMAZ 
  * Email:   osmnylmz@outlook.com
