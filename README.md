@@ -1,15 +1,15 @@
-# Folderia
-Folderia klasör listeleme sınıfı, composer ile kullanım yapılmaktadır.
+# Folderio
+Folderio klasör listeleme sınıfı, composer ile kullanım yapılmaktadır.
 
 ## Kullanım
 ### Composer ile kullanım
 
-```composer require osmanyilmazco/folderia "~1.0"```
+```composer require osmanyilmazco/folderio "~1.0"```
 
 Alternatif olarak ```composer.json``` dosyasınada ekleyebilirsiniz.
 ```
 "require": {
-    "osmanyilmazco/folderia": "~1.0"
+    "osmanyilmazco/folderio": "~1.0"
 }
 ```
 
@@ -19,10 +19,10 @@ Alternatif olarak ```composer.json``` dosyasınada ekleyebilirsiniz.
 require_once __DIR__ . '/src/autoload.php';
 ```
 
-**Sınıfımızı tanımlıyoruz** ```$folder = new Astald\Folderia;``` kullanımı yerine use ile sınıfımızda belirtiyoruz.  Siz istediğiniz gibi kullanabilirsiniz.
+**Sınıfımızı tanımlıyoruz** ```$folder = new Astald\Folderio;``` kullanımı yerine use ile sınıfımızda belirtiyoruz.  Siz istediğiniz gibi kullanabilirsiniz.
 ```
-use Astald\Folderia;
-$folder = new Folderia;
+use Astald\Folderio;
+$folder = new Folderio;
 ```
 
 #### Listeleme tipi varsayılan NULL dur, ihtiyacınıza göre, **"size", "type"** vb. yapabilirsiniz.
