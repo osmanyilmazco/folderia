@@ -13,23 +13,23 @@ use Astald\Folderia; //
 $folder = new Folderia;
 ```
 
-#### Listeleme tipi varsayılan NULL dur, ihtiyacınıza göre, "size", "type" vb. yapabilirsiniz.
+#### Listeleme tipi varsayılan NULL dur, ihtiyacınıza göre, **"size", "type"** vb. yapabilirsiniz.
 
 ```
 $folder->orderBy = 'type';
 ```
 
-**Listeleme yapılırken görünmesini istemediğimiz dosyalarımızı paramet**
+Listeleme yapılırken görünmesini istemediğimiz dosyalarımızı paramet
 ```
 $folder->setFileHidden(array("index.php","zsystem"));
 ```
 
-**setFolderName fonksiyonumuza, listelemenin baz alınacağı klasörü yazıyoruz. Varsayılan kök dizindir **
+**setFolderName** fonksiyonumuza, listelemenin baz alınacağı klasörü yazıyoruz. Varsayılan kök dizindir
 ```
 $folder->setFolderName('customer');
 ```
 
-**getFolder() fonksiyonu ile listelemyi sağlıyoruz. **
+**getFolder()** fonksiyonu ile listelemyi sağlıyoruz.
 ```
 $folder->setFolderName('customer');
 ```
