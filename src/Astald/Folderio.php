@@ -1,7 +1,7 @@
 <?php 
 
 /*
- * Folderia, Klasör sınıfı
+ * Folderio, Klasör sınıfı
  *  
  * Author:  Osman YILMAZ 
  * Email:   osmnylmz@outlook.com
@@ -17,7 +17,7 @@ use Astald\FieldSortHeap;
 use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;
 
-class Folderia
+class Folderio
 {	
 	/*
 	 * Class is version 
