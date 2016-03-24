@@ -43,7 +43,7 @@ $folder->setFolderName('customer');
 
 **getFolder()** fonksiyonu ile listelemyi sağlıyoruz.
 ```
-$folder->setFolderName('customer');
+$folder->getFolder();
 ```
 
 ### Kullanım örneği
