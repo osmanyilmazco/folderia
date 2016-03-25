@@ -123,8 +123,7 @@ class Folderio
         */
 	public function setFolderName($name)
 	{
-		if(!empty($name)) 
-		{
+		if ($this->folderOrFileExists($name)) {
 			$this->rootFolderName = $name;
 			$this->rootFolder = $this->rootFolder."/".$this->rootFolderName;
 		}
