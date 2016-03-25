@@ -143,10 +143,9 @@ class Folderio
 			throw new Exception("Error Processing Request Error: {$e->getMessage()}");
 		}
 
-		if(!empty($this->orderBy)) 
-		{
-			$sortHeap = new FieldSortHeap($this->orderBy);
-		}
+		if(!empty($this->orderBy)) {
+		    $sortHeap = new FieldSortHeap($this->orderBy);
+		} 
 
 		foreach($iterator as $fileinfo) 
 		{   
@@ -171,7 +170,7 @@ class Folderio
 			 
 		}
 
-		return $this->folderList;
+		return $sortHeap;
 	}
 
 
