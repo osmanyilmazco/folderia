@@ -6,6 +6,7 @@
 	"homepage": "http://folderio.astald.com/",
 	"license": "GPL-3.0+",
 	"support": {
+		"email": "info@astald.com",
 		"forum": "http://blog.astald.com/folderio-klasor-sinifi"
 	},
     	"version" : "~1.0.1",
