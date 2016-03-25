@@ -1,14 +1,13 @@
 <?php 
 
-/*
+/**
  * Folderio, Klasör sınıfı
  *  
  * Author:  Osman YILMAZ 
  * Email:   osmnylmz@outlook.com
  * Web:     http://www.astald.com - www.osmnylmz.com
  * 
- * Created Date: 23.03.2016
- *
+ * Created Date: 23.03.2016 
 **/
 
 namespace Astald;
