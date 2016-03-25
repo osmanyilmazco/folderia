@@ -1,5 +1,5 @@
 # Folderio
-Gelişmiş klasör işlemleri sınıfı, composer ile kullanım yapılmaktadır.
+Geliştirilebilir klasör işlemleri sınıfı, composer ile kullanım yapılmaktadır.
 
 ## Kullanım
 ### Composer ile kullanım
