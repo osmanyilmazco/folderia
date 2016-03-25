@@ -137,7 +137,7 @@ class Folderio
 	public function getFolder()
 	{
 		try {
-			$this->rootFolderName = new DirectoryIterator($this->rootFolder);
+			$iterator = new DirectoryIterator($this->rootFolder);
 			// $this->rootFolderName = new RecursiveIteratorIterator(new RecursiveDirectoryIterator($this->rootFolder), RecursiveIteratorIterator::SELF_FIRST); 
 		} catch (RuntimeException $e) {
 			throw new Exception("Error Processing Request Error: {$e->getMessage()}");
@@ -145,10 +145,10 @@ class Folderio
 
 		if(!empty($this->orderBy)) 
 		{
-			$this->folderList = new FieldSortHeap($this->orderBy);
+			$sortHeap = new FieldSortHeap($this->orderBy);
 		}
 
-		foreach($this->rootFolderName as $fileinfo) 
+		foreach($iterator as $fileinfo) 
 		{   
 			if (!in_array($fileinfo->getFileName(), $this->hiddenFiles)) {
 				$fileArrays = array(
@@ -163,9 +163,9 @@ class Folderio
 					'lastMod' => $fileinfo->getMTime()
 				);
 				if (!empty($this->orderBy)) {
-					$this->folderList->insert($fileArrays); 
+					$sortHeap->insert($fileArrays); 
 				} else {
-					$this->folderList[] = $fileArrays; 
+					$sortHeap[] = $fileArrays; 
 				}
 			}
 			 
