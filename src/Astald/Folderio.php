@@ -95,7 +95,8 @@ class Folderio
                 $this->$key = $value;
             }
         }
-        $this->rootFolder = realpath($_SERVER["DOCUMENT_ROOT"]);
+        $serverRoot = $_SERVER["DOCUMENT_ROOT"];
+        $this->rootFolder = realpath('');
 
         array_push($this->hiddenFiles, $this->packageFolder); 
     }
