@@ -1,5 +1,5 @@
 # Folderio
-Folderio klasör listeleme sınıfı, composer ile kullanım yapılmaktadır.
+Gelişmiş klasör işlemleri sınıfı, composer ile kullanım yapılmaktadır.
 
 ## Kullanım
 ### Composer ile kullanım
