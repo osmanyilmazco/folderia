@@ -2,12 +2,13 @@
     "name": "osmanyilmazco/folderio",
     "description": "Gelişmiş klasör işlemleri sınıfı.",
     "type": "library",
-    "keywords": ["folder", "folder class"],
+    "keywords": ["folder", "folderclass"],
     "homepage": "http://folderio.astald.com/",
     "license": "MIT",
     "support": {
         "forum": "http://blog.astald.com/folderio-klasor-sinifi"
     },
+    "minimum-stability": "dev",
     "require": {
         "php": ">=5.0.0",
     },
