@@ -82,10 +82,10 @@ class Folderio
 
 
 	/**
-     * __construct methodu verileri atar.
-     *
-     * @param array $config
-     */
+        * __construct methodu verileri atar.
+        *
+        * @param array $config
+        **/
 	public function __construct(array $config = array()) 
 	{
 		foreach ($config as $key => $value) {
@@ -102,21 +102,25 @@ class Folderio
 
 
 	/**
-     * Gizlenecek olan dosya, klasörleri belirler
-     *
-     * @param string $file
-     * @return array
-     */
-	public function setHiddenFiles($file)
+        * Gizlenecek olan dosya, klasörleri belirler
+        *
+        * @param string $file
+       * @return array
+       */
+	public function setHiddenFiles($files)
 	{
-		$this->hiddenFiles = array_merge($this->hiddenFiles, $file); 
+		if (is_array($files)) {
+			$this->hiddenFiles = array_merge($this->hiddenFiles, $files); 
+		} else {
+			$this->hiddenFiles = array_push($this->hiddenFiles, $files);
+		}
 	}
 
 	/**
-     * Kökdizinin belirler, varsayılan kök dizindir.
-     *
-     * @param string $rootFolderName
-     */
+        * Kökdizinin belirler, varsayılan kök dizindir.
+        *
+        * @param string $rootFolderName
+        */
 	public function setFolderName($rootFolderName)
 	{
 		if(!empty($rootFolderName)) 
