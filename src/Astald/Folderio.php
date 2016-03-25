@@ -119,17 +119,15 @@ class Folderio
 	/**
         * Kökdizinin belirler, varsayılan kök dizindir.
         *
-        * @param string $rootFolderName
+        * @param string $name
         */
-	public function setFolderName($rootFolderName)
+	public function setFolderName($name)
 	{
-		if(!empty($rootFolderName)) 
+		if(!empty($name)) 
 		{
-			$this->rootFolderName = $rootFolderName;
+			$this->rootFolderName = $name;
 			$this->rootFolder = $this->rootFolder."/".$this->rootFolderName;
 		}
-		else 
-			$this->rootFolder;
 	}
 
 	/**
