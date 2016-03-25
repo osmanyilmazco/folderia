@@ -48,8 +48,19 @@ $folder->getFolder();
 
 ### Kullanım örneği
 ```php
+echo "<table border=1>";
+echo "<thead>";
+echo "<tr><th>Dosya Adı</th><th>Tam Dosya Adı:</th><th>Dosya Türü:</th><th>Dosya Boyutu:</th><th>Son Düzenleme Tarihi</th><th>Görünürlük</th></tr>";
+echo "</thead>";
 foreach ($folder->getFolder() as $key => $value) {
-	echo "Dosya Adı : {$value['filename']}, Tam Dosya Adı: {$value['name']}, Dosya Türü: {$value['type']}, Dosya Boyutu: {$value['size']}, Son Düzenleme Tarihi: {$value['lastmod']}";
-	echo "<br>";
+	echo "<tr>";
+	echo "<td>{$value['fileName']}</td>";
+	echo "<td>{$value['name']}</td>";
+	echo "<td>{$value['type']}</td>";
+	echo "<td>{$value['size']}</td>";
+	echo "<td>{$value['lastMod']}</td>";
+	echo "<td>{$value['visible']}</td>";
+	echo "</tr>";
 }
+echo "</table>";
 ```
