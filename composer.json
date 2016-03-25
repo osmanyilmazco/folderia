@@ -8,7 +8,6 @@
     "support": {
         "forum": "http://blog.astald.com/folderio-klasor-sinifi"
     },
-    "minimum-stability": "dev",
     "require": {
         "php": ">=5.0.0",
     },
