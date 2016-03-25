@@ -11,7 +11,7 @@
     "require": {
         "php": ">=5.0.0",
     },
-    "minimum-stability": "stable",
+    "minimum-stability": "master",
     "autoload": {
         "psr-4": {
       	  "Astald\\": "src/Astald"
