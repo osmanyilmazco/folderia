@@ -201,12 +201,12 @@ class Folderio
     public function createFolder($name, $chmod = 0700) 
     {
         try {
-            $this->createFolder = $this->rootFolder ."/". $name;
+            $path = $this->rootFolder ."/". $name;
 
             if ($this->folderOrFileExists($this->createFolder)) {
                 throw new Exception("File exists! Please change folder or file name");          
             }
-            return mkdir($this->createFolder, $chmod); 
+            return mkdir($path, $chmod); 
         } catch (RuntimeException $e) {
             throw new Exception("Couldn't create folder or file: {$e->getMessage()}");
         }
@@ -222,12 +222,12 @@ class Folderio
     public function deleteFolder($name, $permission = true) 
     {
         try {
-            $this->deleteFolder = $this->rootFolder ."/". $name;
+            $path = $this->rootFolder ."/". $name;
 
             if (!$this->folderOrFileExists($this->deleteFolder)) {
                 throw new Exception("File doesn't exists!");            
             }
-            return rmdir($this->deleteFolder); 
+            return rmdir($path); 
         } catch (RuntimeException $e) {
             throw new Exception("Couldn't deleted folder or file: {$e->getMessage()}");
         }
