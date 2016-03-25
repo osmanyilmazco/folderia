@@ -133,10 +133,10 @@ class Folderio
 	}
 
 	/**
-     * Klasör ve dosyaları listeler.
-     *
-     * @return array
-     */
+        * Klasör ve dosyaları listeler.
+        *
+        * @return array
+        */
 	public function getFolder()
 	{
 		try {
