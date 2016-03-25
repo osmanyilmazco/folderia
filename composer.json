@@ -2,7 +2,7 @@
     "name": "osmanyilmazco/folderio",
     "description": "Gelişmiş klasör işlemleri sınıfı.",
     "type": "library",
-    "keywords": ["folder", "folderclass"],
+    "keywords": ["folder", "class"],
     "homepage": "http://folderio.astald.com/",
     "license": "MIT",
     "support": {
@@ -15,6 +15,6 @@
     "autoload": {
         "psr-4": {
       	  "Astald\\": "src/Astald"
-	    }
+	}
     }
 }
