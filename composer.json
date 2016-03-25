@@ -4,7 +4,7 @@
     "type": "library",
     "keywords": ["folder", "folder class"],
     "homepage": "http://folderio.astald.com/",
-    "license": "GNU GENERAL PUBLIC LICENSE",
+    "license": "MIT",
     "support": {
         "forum": "http://blog.astald.com/folderio-klasor-sinifi"
     },
