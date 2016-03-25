@@ -22,12 +22,12 @@ use RecursiveIteratorIterator;
 class Folderio
 {	
 	/*
-	 * Class is version 
+	 * Sınıf sürümü
 	*/
 	const VERSION = '1.0.5';
 
 	/**
-	 * Hata çıktı sonucu
+	 * Hata çıktı bildiri
 	 * @var boolean
 	*/
 	public $debug = false;
