@@ -9,6 +9,7 @@
 		"forum": "http://blog.astald.com/folderio-klasor-sinifi"
 	},
     	"version" : "1.0.1",
+    	"minimum-stability": "dev",
 	"prefer-stable": true,
 	"require": {
 		"php": ">=5.0.0"
