@@ -1,16 +1,21 @@
 {
-    "name": "osmanyilmazco/folderio",
-    "description": "Gelişmiş klasör işlemleri sınıfı.",
-    "type": "library",
-    "homepage": "http://folderio.astald.com/",
-    "license": "MIT",
-    "minimum-stability": "dev",
-    "require": {
-        "php": ">=5.0.0"
-    },
-    "autoload": {
-        "psr-4": {
-      	  "Astald\\": "src/Astald"
-	    }
-    }
+	"name": "osmanyilmazco/folderio",
+	"description": "Gelişmiş klasör işlemleri sınıfı.",
+	"type": "library",
+	"keywords": ["folder", "class"],
+	"homepage": "http://folderio.astald.com/",
+	"license": "MIT",
+	"support": {
+		"forum": "http://blog.astald.com/folderio-klasor-sinifi"
+	},
+	"minimum-stability": "dev",
+	"prefer-stable": true,
+	"require": {
+		"php": ">=5.0.0"
+	},
+	"autoload": {
+		"psr-4": {
+			"Astald\\": "src/Astald"
+		}
+	}
 }
