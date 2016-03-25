@@ -31,7 +31,7 @@ $folder = new Folderio; // $folder = new Folderio($config);
 $folder->orderBy = 'type';
 ```
 
-Listeleme yapılırken görünmesini istemediğimiz dosyalarımızı paramet
+Listeleme yapılırken görünmesini istemediğimiz dosyalarımızı dizi değişkenimizle belirtiyoruz.
 ```php
 $folder->setFileHidden(array("index.php","zsystem"));
 ```
