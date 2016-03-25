@@ -4,6 +4,7 @@
     "type": "library",
     "homepage": "http://folderio.astald.com/",
     "license": "MIT",
+    "minimum-stability": "dev",
     "autoload": {
         "psr-4": {
       	  "Astald\\": "src/Astald"
