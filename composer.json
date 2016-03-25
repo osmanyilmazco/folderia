@@ -9,12 +9,13 @@
         "forum": "http://blog.astald.com/folderio-klasor-sinifi"
     },
     "minimum-stability": "dev",
+    "prefer-stable" : true,
     "require": {
         "php": ">=5.0.0",
     },
     "autoload": {
         "psr-4": {
       	  "Astald\\": "src/Astald"
-	}
+	    }
     }
 }
