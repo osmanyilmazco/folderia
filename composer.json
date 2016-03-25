@@ -1,6 +1,6 @@
 {
 	"name": "osmanyilmazco/folderio",
-	"description": "Gelişmiş klasör işlemleri sınıfı.",
+	"description": "Geliştirilebilir klasör işlemleri sınıfı.",
 	"type": "library",
 	"keywords": ["folder", "class"],
 	"homepage": "http://folderio.astald.com/",
