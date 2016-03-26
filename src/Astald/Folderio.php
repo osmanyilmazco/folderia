@@ -1,30 +1,30 @@
 <?php 
 
-/**
- * Folderio, Klasör sınıfı
- *  
- * Author:  Osman YILMAZ 
- * Email:   osmnylmz@outlook.com
- * Web:     http://www.astald.com - www.osmnylmz.com
- * 
- * Created Date:    23.03.2016
- * Update Date:     25.03.2016
-**/
-
 namespace Astald;
-
+ 
 use Astald\FieldSortHeap;
 use Exception;
 use DirectoryIterator;
 use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;
 
+/**
+ * Folderio, Klasör sınıfı
+ *  
+ * Author : Osman YILMAZ 
+ * Email  : osmnylmz@outlook.com
+ * Web    : http://www.astald.com - www.osmnylmz.com
+ * 
+ * Created Date     : 23.03.2016 
+ * Last Update Date : 27.03.2016
+**/
+    
 class Folderio
 {   
     /*
      * Sınıf sürümü
     */
-    const VERSION = '1.0.5';
+    const VERSION = '1.1.0';
 
     /**
      * Hata çıktı bildiri
@@ -33,81 +33,70 @@ class Folderio
     public $debug = false;
 
     /**
-     * Kök dizin değişkeni
+     * Kök dizin
      * @var string
     */
-    public $rootFolder = null;  
+    private $folder;
 
     /**
-     * Kök dizin isim değişkeni
-     * @var string
+     * Sıralama sınıf nesnesi
+     * @var SplHeap Object
     */
-    public $rootFolderName = null;
+    private $shortHeap;  
 
     /**
-     * Listleme filtre değişkeni
-     * @var string
-    */
-    public $orderBy = null;
-
-    /**
-     * Gizli dosya ve klasör değişkeni
+     * Gizli dosyalar ve klasörler
      * @var array
     */
-    public $hiddenFiles = array('.','..');   
+    private $hiddenFiles  = array('.', '..');
 
     /**
-     * Klasör alt kayıt değişkeni
-     * @var boolean
+     * Kök dizin sonuç değerleri
+     * @var array
     */
-    public $children = false;
+    private $items  = array();
 
     /**
-     * Klasör oluşturma değişkeni
-     * @var string
-    */
-    public $createFolder = null;
-
-    /**
-     * Klasör silme değişkeni
-     * @var string
-    */
-    public $deleteFolder = null;
-
-    /**
-     * Klasör paket değişkeni
-     * @var string
-    */
-    public $packageFolder = 'localhost';
-
-
-    /**
-    * __construct methodu verileri atar.
-    *
-    * @param array $config
-    **/
-    public function __construct(array $config = array()) 
+     * Dizin tanımlaması yapılır.
+     * 
+     * @param string $folder 
+     */
+    public function __construct($folder = '')
     {
-        foreach ($config as $key => $value) {
-            $accept = array('debug', 'orderBy' , 'children');
+        $this->folder = realpath(''); 
 
-            if(isset($this->$key) and in_array($key, $accept)) {
-                $this->$key = $value;
-            }
-        }
-        $serverRoot = $_SERVER["DOCUMENT_ROOT"];
-        $this->rootFolder = realpath('');
-
-        array_push($this->hiddenFiles, $this->packageFolder); 
+        if (!empty($folder)) {
+            $this->setFolder($folder);
+        } 
     }
 
+    /**
+     * Kökdizinin belirler, varsayılan kök dizindir.
+     *
+     * @param string $name
+     * @return Folderio
+    */
+    public function setFolder($folder) 
+    {
+        $realpath = realpath('') . '/' . $folder;
+
+        if ($this->exists($realpath)) {
+            $this->folder = $realpath;
+            $this->shortHeap = null;
+            $this->hiddenFiles = array('.', '..');
+            $this->items = array();
+        } else {
+            throw new Exception("Folder doesn't exists!");
+        }
+        return $this;
+    }
 
     /**
-    * Gizlenecek olan dosya, klasörleri belirler
-    *
-    * @param string $file
-   * @return array
-   */
+     * Gizlenecek olan dosya, klasörleri belirler
+     *
+     * @param string $file 
+     * @return Folderio
+    */
     public function setHiddenFiles($files)
     {
         if (is_array($files)) {
@@ -115,43 +104,26 @@ class Folderio
         } else {
             $this->hiddenFiles = array_push($this->hiddenFiles, $files);
         }
+        return $this;
     }
 
     /**
-    * Kökdizinin belirler, varsayılan kök dizindir.
-    *
-    * @param string $name
+     * Klasör ve dosyaları listeler.
+     *
+     * @return array
     */
-    public function setFolderName($name)
-    {
-        if ($this->folderOrFileExists($name)) {
-            $this->rootFolderName = $name;
-            $this->rootFolder = $this->rootFolder."/".$this->rootFolderName;
-        }
-    }
-
-    /**
-    * Klasör ve dosyaları listeler.
-    *
-    * @return array
-    */
-    public function getFolder()
-    {
+    private function getData()
+    { 
         try {
-            $iterator = new DirectoryIterator($this->rootFolder);
-            // $this->rootFolderName = new RecursiveIteratorIterator(new RecursiveDirectoryIterator($this->rootFolder), RecursiveIteratorIterator::SELF_FIRST); 
+            $iterator = new DirectoryIterator($this->folder);
+            // $folderName = new RecursiveIteratorIterator(new RecursiveDirectoryIterator($folder), RecursiveIteratorIterator::SELF_FIRST); 
         } catch (RuntimeException $e) {
             throw new Exception("Error Processing Request Error: {$e->getMessage()}");
         }
 
-        if(!empty($this->orderBy)) {
-            $sortHeap = new FieldSortHeap($this->orderBy);
-        } 
-
-        foreach($iterator as $fileinfo) 
-        {   
+        foreach ($iterator as $fileinfo) {   
             if (!in_array($fileinfo->getFileName(), $this->hiddenFiles)) {
-                $fileArrays = array(
+                $item = array(
                     'name' => $fileinfo->getPathname(),
                     'fullName' => $fileinfo,
                     'fileName' => $fileinfo->getFileName(),
@@ -162,18 +134,51 @@ class Folderio
                     'getOwner' => $fileinfo->getOwner(),
                     'lastMod' => $fileinfo->getMTime()
                 );
-                if (!empty($this->orderBy)) {
-                    $sortHeap->insert($fileArrays); 
-                } else {
-                    $sortHeap[] = $fileArrays; 
+                $this->items[] = $item;
+                if (!empty($this->shortHeap)) { 
+                    $this->shortHeap->insert($item); 
                 }
-            }
-             
-        }
-
-        return $sortHeap;
+            } 
+        }  
     }
 
+    /**
+     * Filtreleme methodu.
+     *
+     * @return Folderio
+    */
+    public function orderBy($name) 
+    { 
+        $this->shortHeap = new FieldSortHeap($name); 
+        return $this;
+    }
+
+    /**
+     * Kök dizin sonuçlarını array olarak döndürür.
+     *
+     * @return array
+    */
+    public function toArray() 
+    { 
+        if (count($this->items) < 1) {
+            $this->getData();
+        } 
+
+        if (isset($this->shortHeap)) {
+            return iterator_to_array($this->shortHeap);
+        }
+        return $this->items;
+    }
+
+    /**
+     * Kök dizin sonuçlarını json olarak döndürür.
+     *
+     * @return array
+    */
+    public function toJson() 
+    { 
+        return json_encode($this->toArray());
+    }
 
     /**
      * Dosya ve Klasör varlığını kontrol eder.
@@ -181,15 +186,14 @@ class Folderio
      * @param string $name
      * @return boolean
      */
-    public function folderOrFileExists($name) 
+    private function exists($name) 
     {
         if (file_exists($name)) {
-            return true;
+            return true; 
         } else {
             return false;
         }
     }
-
 
     /**
      * Klasör oluşturur
@@ -199,38 +203,31 @@ class Folderio
      * @return boolean
      */
     public function createFolder($name, $chmod = 0700) 
-    {
-        try {
-            $path = $this->rootFolder ."/". $name;
-
-            if ($this->folderOrFileExists($this->createFolder)) {
-                throw new Exception("File exists! Please change folder or file name");          
-            }
-            return mkdir($path, $chmod); 
-        } catch (RuntimeException $e) {
-            throw new Exception("Couldn't create folder or file: {$e->getMessage()}");
+    { 
+        $path = $this->folder . '/' . $name;
+        
+        if ($this->exists($path)) {
+            throw new Exception("File exists! Please change folder or file name");          
         }
+
+        return mkdir($path, $chmod); 
     }
 
     /**
      * Klasör siler
      *
-     * @param string $name
-     * @param integer $chmod
+     * @param string $name 
      * @return boolean
      */
     public function deleteFolder($name, $permission = true) 
-    {
-        try {
-            $path = $this->rootFolder ."/". $name;
+    { 
+        $path = $this->folder . '/' . $name;
 
-            if (!$this->folderOrFileExists($this->deleteFolder)) {
-                throw new Exception("File doesn't exists!");            
-            }
-            return rmdir($path); 
-        } catch (RuntimeException $e) {
-            throw new Exception("Couldn't deleted folder or file: {$e->getMessage()}");
+        if (!$this->exists($path)) {
+            throw new Exception("File doesn't exists!");            
         }
+
+        return rmdir($path); 
     }
 
     /**
@@ -254,5 +251,4 @@ class Folderio
             return '0 bytes';
         }
     }
-
 }
