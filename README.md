@@ -46,7 +46,7 @@ echo "<table border=1>";
 echo "<thead>";
 echo "<tr><th>Dosya Adı</th><th>Tam Dosya Adı:</th><th>Dosya Türü:</th><th>Dosya Boyutu:</th><th>Son Düzenleme Tarihi</th><th>Görünürlük</th></tr>";
 echo "</thead>";
-foreach ($items as $key => $value) {
+foreach ($folder->toArray() as $key => $value) {
 	echo "<tr>";
 	echo "<td>{$value['fileName']}</td>";
 	echo "<td>{$value['name']}</td>";
@@ -57,14 +57,13 @@ foreach ($items as $key => $value) {
 	echo "</tr>";
 } 
 echo "</table>"; 
-
-echo "<table border=1>";
-echo "<thead>";
 ```
 ```php
+echo "<table border=1>";
+echo "<thead>";
 echo "<tr><th>Dosya Adı</th><th>Tam Dosya Adı:</th><th>Dosya Türü:</th><th>Dosya Boyutu:</th><th>Son Düzenleme Tarihi</th><th>Görünürlük</th></tr>";
 echo "</thead>";
-foreach ($itemsTwo as $key => $value) {
+foreach ($folder->setFolder('/')->toArray() as $key => $value) {
 	echo "<tr>";
 	echo "<td>{$value['fileName']}</td>";
 	echo "<td>{$value['name']}</td>";
