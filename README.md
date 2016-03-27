@@ -28,7 +28,6 @@ $items = $folder->setFileHidden(array("index.php","localhost","folderio"))->setF
 // $folder->setFolder('/folderio-master')->deleteFolder('test');
 $itemsTwo = $folder->setFolder('/')->toArray();
 ```
-7
 
 **setFolderName()** fonksiyonumuza, listelemenin baz alınacağı klasörü yazıyoruz. Varsayılan kök dizindir
 ```php
