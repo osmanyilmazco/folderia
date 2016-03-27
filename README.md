@@ -4,12 +4,12 @@ Geliştirilebilir klasör işlemleri sınıfı, composer ile kullanım yapılmak
 ## Kullanım
 ### Composer ile kullanım
 
-```composer require osmanyilmazco/folderio "~1.0"```
+```composer require osmanyilmazco/folderio "~1.1"```
 
 Alternatif olarak ```composer.json``` dosyasınada ekleyebilirsiniz.
 ```json
 "require": {
-    "osmanyilmazco/folderio": "~1.0"
+    "osmanyilmazco/folderio": "~1.1"
 }
 ```
 
@@ -21,29 +21,23 @@ require_once __DIR__ . '/src/autoload.php';
 
 **Sınıfımızı tanımlıyoruz** ```$folder = new Astald\Folderio;``` kullanımı yerine use ile sınıfımızda belirtiyoruz.  Siz istediğiniz gibi kullanabilirsiniz.
 ```php
-use Astald\Folderio;
-$folder = new Folderio; // $folder = new Folderio($config);
-```
+$folder = new Astald\Folderio;
 
-#### Listeleme tipi varsayılan NULL dur, ihtiyacınıza göre, **"size", "type"** vb. yapabilirsiniz.
-
-```php
-$folder->orderBy = 'type';
+$items = $folder->setFileHidden(array("index.php","localhost","folderio"))->setFolder('src')->toArray();
+// $folder->setFolder('/folderio-master')->createFolder('test');
+// $folder->setFolder('/folderio-master')->deleteFolder('test');
+$itemsTwo = $folder->setFolder('/')->toArray();
 ```
-
-Listeleme yapılırken görünmesini istemediğimiz dosyalarımızı dizi değişkenimizle belirtiyoruz.
-```php
-$folder->setFileHidden(array("index.php","zsystem"));
-```
+7
 
 **setFolderName()** fonksiyonumuza, listelemenin baz alınacağı klasörü yazıyoruz. Varsayılan kök dizindir
 ```php
-$folder->setFolderName('customer');
+$folder->setFolder('customer');
 ```
 
-**getFolder()** fonksiyonu ile listelemyi sağlıyoruz.
+**toArray()** fonksiyonu ile listelemyi sağlıyoruz.
 ```php
-$folder->getFolder();
+$folder->toArray();
 ```
 
 ### Kullanım örneği
@@ -52,7 +46,7 @@ echo "<table border=1>";
 echo "<thead>";
 echo "<tr><th>Dosya Adı</th><th>Tam Dosya Adı:</th><th>Dosya Türü:</th><th>Dosya Boyutu:</th><th>Son Düzenleme Tarihi</th><th>Görünürlük</th></tr>";
 echo "</thead>";
-foreach ($folder->getFolder() as $key => $value) {
+foreach ($items as $key => $value) {
 	echo "<tr>";
 	echo "<td>{$value['fileName']}</td>";
 	echo "<td>{$value['name']}</td>";
@@ -61,6 +55,24 @@ foreach ($folder->getFolder() as $key => $value) {
 	echo "<td>{$value['lastMod']}</td>";
 	echo "<td>{$value['visible']}</td>";
 	echo "</tr>";
-}
+} 
+echo "</table>"; 
+
+echo "<table border=1>";
+echo "<thead>";
+```
+```php
+echo "<tr><th>Dosya Adı</th><th>Tam Dosya Adı:</th><th>Dosya Türü:</th><th>Dosya Boyutu:</th><th>Son Düzenleme Tarihi</th><th>Görünürlük</th></tr>";
+echo "</thead>";
+foreach ($itemsTwo as $key => $value) {
+	echo "<tr>";
+	echo "<td>{$value['fileName']}</td>";
+	echo "<td>{$value['name']}</td>";
+	echo "<td>{$value['type']}</td>";
+	echo "<td>{$value['size']}</td>";
+	echo "<td>{$value['lastMod']}</td>";
+	echo "<td>{$value['visible']}</td>";
+	echo "</tr>";
+} 
 echo "</table>";
 ```
