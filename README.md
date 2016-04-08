@@ -1,15 +1,15 @@
 # Folderio
-Geliştirilebilir klasör işlemleri sınıfı, composer ile kullanım yapılmaktadır.
+Geliştirilebilir klasör işlemleri sınıfı, composer ile kullanım yapılabilmektedir.
 
 ## Kullanım
 ### Composer ile kullanım
 
-```composer require osmanyilmazco/folderio "~1.1"```
+```composer require osmanyilmazco/folderio "~1.2"```
 
 Alternatif olarak ```composer.json``` dosyasınada ekleyebilirsiniz.
 ```json
 "require": {
-    "osmanyilmazco/folderio": "~1.1"
+    "osmanyilmazco/folderio": "~1.2"
 }
 ```
 
@@ -19,17 +19,15 @@ Alternatif olarak ```composer.json``` dosyasınada ekleyebilirsiniz.
 require_once __DIR__ . '/src/autoload.php';
 ```
 
-**Sınıfımızı tanımlıyoruz** ```$folder = new Astald\Folderio;``` kullanımı yerine use ile sınıfımızda belirtiyoruz.  Siz istediğiniz gibi kullanabilirsiniz.
+**Sınıfımızı tanımlıyoruz** ```$folder = new Astald\Folderio;``` kullanılabilir. İsteğe bağlı.
 ```php
-$folder = new Astald\Folderio;
-
-$items = $folder->setFileHidden(array("index.php","localhost","folderio"))->setFolder('src')->toArray();
-// $folder->setFolder('/folderio-master')->createFolder('test');
-// $folder->setFolder('/folderio-master')->deleteFolder('test');
-$itemsTwo = $folder->setFolder('/')->toArray();
+$items2 = Astald\Folderio::factory()->setFolder('/')->toArray();
+$items = Astald\Folderio::factory()->setFolder('src')->toArray(); 
+// $folder->setFolder('../')->create('folderio');
+// Astald\Folderio::factory()->setFolder('/')->delete('folderio');
 ```
 
-**setFolderName()** fonksiyonumuza, listelemenin baz alınacağı klasörü yazıyoruz. Varsayılan kök dizindir
+**setFolder()** fonksiyonumuza, listelemenin baz alınacağı klasörü yazıyoruz. Varsayılan kök dizindir
 ```php
 $folder->setFolder('customer');
 ```

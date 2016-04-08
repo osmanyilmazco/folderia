@@ -16,7 +16,7 @@ use RecursiveIteratorIterator;
  * Web    : http://www.astald.com - www.osmnylmz.com
  * 
  * Created Date     : 23.03.2016 
- * Last Update Date : 27.03.2016
+ * Last Update Date : 08.04.2016
 **/
     
 class Folderio
@@ -24,37 +24,55 @@ class Folderio
     /*
      * Sınıf sürümü
     */
-    const VERSION = '1.1.0';
+    const VERSION = '1.2.0';
 
     /**
      * Hata çıktı bildiri
+     *
      * @var boolean
     */
     public $debug = false;
 
     /**
      * Kök dizin
+     *
      * @var string
     */
     private $folder;
 
     /**
      * Sıralama sınıf nesnesi
+     *
      * @var SplHeap Object
     */
     private $shortHeap;  
 
     /**
      * Gizli dosyalar ve klasörler
+     * 
      * @var array
     */
     private $hiddenFiles  = array('.', '..');
 
     /**
      * Kök dizin sonuç değerleri
+     *
      * @var array
     */
     private $items  = array();
+
+    /**
+     * Klasör oluşturma, silme, yeniden isimlendirme ve taşıma işlemleri için kullanım kolaylığı sağlanır.
+     * 
+     * @var array
+    */
+    public $aliases = array(
+        'create'    => array('createFolder', 'createDir', 'createDirectory'),
+        'delete'    => array('deleteDir', 'deleteDirectory'),
+        'rename'    => array('renameFolder', 'renameDir', 'renameDirectory'),
+        'move'      => array('moveFolder','moveDir', 'moveDirectory'),
+        'hidden'    => array('hiddenFolder', 'hiddenFolders', 'hiddenFile', 'hiddenFiles')
+    );
 
     /**
      * Dizin tanımlaması yapılır.
@@ -67,7 +85,34 @@ class Folderio
 
         if (!empty($folder)) {
             $this->setFolder($folder);
-        } 
+        }
+    }
+
+    /**
+     * Sınıf içinde tanımlanan methodların varlığını kontrol eder.
+     * 
+     * @param string $methodName
+     * @param array $methodArguments 
+     * @return $this
+    */
+    public function __call($methodName, $methodArguments)
+    {
+        foreach ($this->aliases as $method => $_aliases)
+        {
+            if (in_array($methodName, $_aliases) && method_exists($this, $method)) {
+                return call_user_func_array(array($this, $method), $methodArguments);
+            }
+        }
+    }
+
+    /**
+     * Sınıfı kendi içinde tanımlayıp çağırır.
+     *
+     * @param string $a; 
+    */  
+    public static function factory($folder = NULL)
+    {
+        return new self($folder);
     }
 
     /**
@@ -76,7 +121,7 @@ class Folderio
      * @param string $name
      * @return Folderio
     */
-    public function setFolder($folder) 
+    public function _setFolder($folder) 
     {
         $realpath = realpath('') . '/' . $folder;
 
@@ -87,8 +132,7 @@ class Folderio
             $this->items = array();
         } else {
             throw new Exception("Folder doesn't exists!");
-        }
-        return $this;
+        } 
     }
 
     /**
@@ -97,22 +141,55 @@ class Folderio
      * @param string $file 
      * @return Folderio
     */
-    public function setHiddenFiles($files)
-    {
-        if (is_array($files)) {
-            $this->hiddenFiles = array_merge($this->hiddenFiles, $files); 
+    public function _hidden($name)
+    { 
+        if (is_array($name)) {
+            $this->hiddenFiles = array_merge($this->hiddenFiles, $name); 
         } else {
-            $this->hiddenFiles = array_push($this->hiddenFiles, $files);
-        }
+            $this->hiddenFiles = array_push($this->hiddenFiles, $name);
+        }  
         return $this;
     }
 
+    /**
+     * Klasör oluşturur
+     *
+     * @param string $name
+     * @param string $name
+     * @param integer $chmod
+     * @return boolean
+     */
+    public function _create($folder, $name, $chmod = 0700) 
+    { 
+        $path = $folder . '/' . $name;
+        
+        if (!$this->exists($path)) {         
+            return mkdir($path, $chmod); 
+        }
+    }
+
+    /**
+     * Klasör siler
+     *
+     * @param string $name 
+     * @return boolean
+     */
+    public function _delete($folder, $name, $permission) 
+    { 
+        $path = $folder . '/' . $name;
+
+        if ($this->exists($path)) {
+            return rmdir($path); 
+        }
+    }
+
+    
     /**
      * Klasör ve dosyaları listeler.
      *
      * @return array
     */
-    private function getData()
+    private function direcotry()
     { 
         try {
             $iterator = new DirectoryIterator($this->folder);
@@ -161,7 +238,7 @@ class Folderio
     public function toArray() 
     { 
         if (count($this->items) < 1) {
-            $this->getData();
+            $this->direcotry();
         } 
 
         if (isset($this->shortHeap)) {
@@ -195,40 +272,59 @@ class Folderio
         }
     }
 
+
+
     /**
-     * Klasör oluşturur
+     * _setFolder methodu üzerinden işlemleri gerçekleştirir
+     *
+     * @param string $name
+     * @return Folderio
+    */
+    public function setFolder($name) 
+    {
+        static::_setFolder($name);
+        return $this;
+    }
+
+    /**
+     * _hidden methodu üzerinden işlemleri gerçekleştirir
+     *
+     * @param string $file 
+     * @return Folderio
+    */
+    public function hidden($name)
+    {
+        static::_hidden($name); 
+        return $this;
+    }
+
+
+    /** 
+     * _create methodu üzerinden işlemleri gerçekleştirir.
      *
      * @param string $name
      * @param integer $chmod
      * @return boolean
      */
-    public function createFolder($name, $chmod = 0700) 
-    { 
-        $path = $this->folder . '/' . $name;
-        
-        if ($this->exists($path)) {
-            throw new Exception("File exists! Please change folder or file name");          
-        }
-
-        return mkdir($path, $chmod); 
+    public function create($name, $mod = 0700)
+    {
+        static::_create($this->folder, $name, $mod);
+        return $this;
     }
 
-    /**
-     * Klasör siler
+    /** 
+     * _delete methodu üzerinden işlemleri gerçekleştirir
      *
-     * @param string $name 
+     * @param string $name
+     * @param boolean $permission
      * @return boolean
      */
-    public function deleteFolder($name, $permission = true) 
+    public function delete($name, $permission = true) 
     { 
-        $path = $this->folder . '/' . $name;
-
-        if (!$this->exists($path)) {
-            throw new Exception("File doesn't exists!");            
-        }
-
-        return rmdir($path); 
+        static::_delete($this->folder, $name, $permission);
+        return $this;
     }
+
 
     /**
      * Dosya boyutunu hesaplar
