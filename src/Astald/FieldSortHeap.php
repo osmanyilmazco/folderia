@@ -3,11 +3,11 @@
 /**
  * Folderio, Klasör sınıfı
  *  
- * Author:  Osman YILMAZ 
- * Email:   osmnylmz@outlook.com
- * Web:     http://www.astald.com - www.osmnylmz.com
+ * Author : Osman YILMAZ 
+ * Email  : astald@astald.com <info@astald.com>
+ * Web 	  : http://www.astald.com
  * 
- * Created Date: 23.03.2016 
+ * Created Date : 23.03.2016 
 **/
 
 namespace Astald;

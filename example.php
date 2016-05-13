@@ -15,18 +15,25 @@
 require_once __DIR__ . '/src/autoload.php';  // Composer olmadan kullanmak için.
 
 
-$items2 = Astald\Folderio::factory()->setFolder('/')->toArray();
-$items = Astald\Folderio::factory()->setFolder('src')->toArray(); 
-// $folder->setFolder('../')->createFolder('folderio');
-// Astald\Folderio::factory()->setFolder('/')->deleteDir('folderio');
- 
+// $items2 = ;
 
+/*foreach (Astald\Folderio::factory() as $item)  {
+	echo $item['name'];
+}*/
+
+// $items = Astald\Folderio::factory()->setFolder('src')->toArray(); 
+// $folder->setFolder('../')->createFolder('folderio');
+var_dump(Astald\Folderio::factory()->setFolder('/')->toArray());
+ 
 echo "<table border=1>";
 echo "<thead>";
 
 echo "<tr><th>Dosya Adı</th><th>Tam Dosya Adı:</th><th>Dosya Türü:</th><th>Dosya Boyutu:</th><th>Son Düzenleme Tarihi</th><th>Görünürlük</th></tr>";
 echo "</thead>";
-foreach ($items as $key => $value) { 
+
+// $items = Astald\Folderio::factory()->orderBy('size');
+
+foreach (Astald\Folderio::factory()->orderBy('name')->toArray() as $key => $value) {  
 	echo "<tr>";
 	echo "<td>{$value['fileName']}</td>";
 	echo "<td>{$value['name']}</td>";
@@ -38,12 +45,14 @@ foreach ($items as $key => $value) {
 } 
 echo "</table>"; 
 
+
+
 echo "<table border=1>";
 echo "<thead>";
 
 echo "<tr><th>Dosya Adı</th><th>Tam Dosya Adı:</th><th>Dosya Türü:</th><th>Dosya Boyutu:</th><th>Son Düzenleme Tarihi</th><th>Görünürlük</th></tr>";
 echo "</thead>";
-foreach ($items2 as $key => $value) {
+foreach (Astald\Folderio::factory()->toArray() as $key => $value) {
 	echo "<tr>";
 	echo "<td>{$value['fileName']}</td>";
 	echo "<td>{$value['name']}</td>";
