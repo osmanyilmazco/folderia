@@ -122,7 +122,7 @@ class Folderio
      */
     public function create($name, $chmod = 0700) 
     { 
-        $path = $this->folder . '/' . $name;
+        $path = $this->folder . DIRECTORY_SEPARATOR . $name;
         
         if (!file_exists($path)) {         
             return mkdir($path, $chmod); 
@@ -136,7 +136,7 @@ class Folderio
      */
     public function delete($name)
     { 
-        $path = $this->folder . '/' . $name;
+        $path = $this->folder . DIRECTORY_SEPARATOR . $name;
 
         if (file_exists($path)) {
             return rmdir($path); 
@@ -151,7 +151,7 @@ class Folderio
     private function direcotry()
     { 
         try {
-            $iterator = new DirectoryIterator($this->folder . '/'); 
+            $iterator = new DirectoryIterator($this->folder . DIRECTORY_SEPARATOR); 
         } catch (RuntimeException $e) {
             throw new Exception("Error Processing Request Error: {$e->getMessage()}");
         }
