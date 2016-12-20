@@ -110,7 +110,6 @@ class Folderio
             $this->hiddenFiles = array_push($this->hiddenFiles, $name);
         }  
         return $this;
-        return $this;
     }
 
 
