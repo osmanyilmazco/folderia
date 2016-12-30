@@ -2,7 +2,7 @@ title: Folderio - Klasör Yönetim Sınıf
 description: Geliştirilebilir klasör işlemleri sınıfı
 google_analytics: 
 show_downloads: true
-theme: jekyll-theme-leap-day
+theme: jekyll-theme-cayman
 
 gems:
   - jekyll-mentions
